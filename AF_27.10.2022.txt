@@ -1,0 +1,151 @@
+AF - 27.10.2022
+
+Subprograme
+
+Un subprogram poate fi privit ca o cutie neagra care preia niste date de intrare, efectueaza anumite prelucrari 
+specifice (precise) asupra lor si furnizeaz niste date de iesire.
+
+Motive pentru a utiliza subprograme: 
+
+1. exista operatii care se repeta (de exemplu citirea unui vector, sortarea unui vector, etc.) pentru care vom scrie
+cod o singura data sub forma unui subprogram si il vom utiliza de cate ori este nevoie
+
+2. pentru a creste vizibilitatea programelor mai complexe; acestea sunt mai usor de scris, depanat, modificat daca 
+sunt modularizate
+
+2 tipuri de subprograme: 
+	- proceduri
+	- functii
+
+Proceduri 
+
+Definitia unei proceduri in pseudocod:
+
+-procedura numeP (pF1, pF2, ..., pFn)
+|	corpul procedurii format din instructiuni
+Lreturn
+
+Ex: maximul a doua numere
+
+-procedura maxim (a, b, max)
+|	-daca a > b atunci
+|	|	max <- a 
+|	|altfel 
+|	|	max <- b
+|	L
+Lreturn
+
+pF1, pF2, ..., pFn se numesc parametrii formali si sunt niste variabile pe care programul apelant le va incarca cu 
+valorile de prelucrat (cu datele de intrare)
+
+Apelul unei proceduri:
+
+numeP(pA1, pA2, ..., pAn)		, unde pA1, pA2, ..., pAn se numesc parametrii de apel si contin valorile care se 
+						vor incarca in parametrii formali pentru a fi prelucrate de procedura 
+
+pA1 in pF1 
+pA2 in pF2
+.
+.
+.
+pAn in pFn
+
+ex: 
+
+start 
+	citeste x, y
+	maxim(x, y, max)
+	scrie m
+stop
+
+
+Moduri de transmitere a parametrilor
+
+1. prin valoare
+
+La apelul
+	numeP(pA1, ..., pAn)
+valorile parametrilor de apel se incarca in parametrii formali (pA1 in pF1, ..., pAn in pFn), apoi se efectueaza 
+instructiunile care formeaza corpul procedurii, iar la intalnirea instructiunii return controlul este redat 
+(sub)programului apelant. La revenirea in acesta parametrii de apel au valorile pe care le aveau inaintea apelului 
+procedurii. (modificarile facute asupra parametrului formal nu se reflecta asupra parametrilor de apel)
+
+2. Transmiterea parametrilor prin referinta
+
+Valorile parametrilor de apel se incarca in parametrii formali in acelasi mod in care se 
+
+
+La revenirea in acesta valorile parametrilor formali se incarca in parametrii de apel (pF1 in pA1, ..., pFn in pAn)
+Cu alte cuvinte modificarile facute de procedura asupra parametrilor formali se reflecta in parametrii de apel.
+
+Transmiterea	- prin valoare 
+			- prin referinta
+
+
+Parametri de apel
+
+ex:	x si y se pot transmite si prin valoare si prin referinta
+	m se transmite prin referinta
+
+
+Functii
+
+-au toate caracteristicile unei proceduri si in plus fata de acestea au o valoare returnata care poate fi folosita 
+ca un operant intr-o expresie
+
+Definirea unei functii:
+
+functie numeF (pF1, pF2, ..., pFn)
+	corpul functiei format din instructiuni
+return val
+
+functie maxim (a, b)
+	daca a > b atunci
+		max <- a 
+	altfel
+		max <- b
+return max
+
+functie maxim (a, b)
+	daca a > b atunci
+		return a
+	return b
+
+Apelul unei functii se face secund intr-o expresie numeF (pA1, pA2, ..., pAn)
+
+start 
+	citeste x, y
+	scrie maxim(x, y)
+stop
+
+Parametrii se pot transmite atat prin valoare, cat si prin referinta 
+
+
+Functiile recursive
+
+n! 	= {1, daca n = 0}
+	= {n * (x - 1), daca n >= 1}
+
+functie fact(n)
+	daca n = 0 atunci
+		return 1
+	altfel
+		return n * fact(n - 1)
+
+O functie recursiva este o functie care se autoapeleaza (pentru valori diferite ale parametrilor formali)
+
+!Obs: Orice functie recursiva trebuia sa aiba cel putin o conditie de oprire!!! Cand aceasta conditie este 
+	indeplinita, valoarea returnata de fct se determina direct fara autoapel.
+
+start 
+	citeste n
+	scrie fact(n)
+stop
+
+Parametrul poate fi transmis atat prin valoare cat si prin referinta.
+	
+
+ 
+
+
+

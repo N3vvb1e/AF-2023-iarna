@@ -1,0 +1,128 @@
+AF - 08.12.2022
+
+Backtracking recursiv									Backtracking iterativ
+
+
+x = (x0, x1, ..., xn-1)								procedura backtracking
+													pentru i = 0, n - 1
+{xi apartine {1, ..., n}, oricare art fi i=0,n-1						x[i] = -1
+{Cond.interne											k = 0
+													cat timp k >= 0
+														daca k = n atunci
+															retineSol
+															k = k - 1
+														altfel 
+															daca x[k] < m atunci
+																x[k] = x[k] + 1
+																daca continuare(k) atunci
+																	k = k + 1
+															else 
+																x[k] = -1		
+																k = k - 1
+procedura backtracking_recursiv(k)
+	daca k = n atunci
+		retineSol
+	altfel
+		pentru x[k] = 1, n
+			daca continuare(k) atunci
+				backtracking_recursiv(k + 1)
+
+//se apeleaza cu backtracking_recursiv(0)
+
+
+Analiza eficientei algoritmilor 
+
+A analiza eficienta unui algoritm inseamna a estima resursele necesare executiei algoritmului. In general se
+estimeaza timpul executiei algoritmului, insa poate fi necesar sa estimam si dimensiunea memoriei utilizate.
+
+Ordinul lui f
+
+daca f:N -> R atunci ordinul lui f este multimea de functii 
+										O(f) = {g:N -> R+} exista c apartine R+, exista n0 apartine N
+										astfel incat pt oricare ar fi n >= n0 sa avem g(n) <= c * f(n)}
+
+->g marginite superior de un multiplu real pozitiv al functiei f pt valori suficient de mari ale argumentului n
+
+Principiul invariantei
+
+Daca o anumita implementare a unui algoritm rezolva o problema de dimensiune n in timpul t(n) atunci orice alta 
+implementare a algoritmului rezolva o problema de dimensiune n intr-un timp care difera de t(n) printr-o constanta 
+mutiplicativa real pozitiva.
+
+O(t)				O(1) ⊂ O(logn) ⊂ O(n) ⊂ O(nlogn) ⊂ O(n^2) ⊂ O(n^3) ⊂ O(2^n)
+
+Ex: 	t(n) = 2n^2 - 3n + 4			|
+	2n^2 - 3n + 4 <= 2n^2 pt n >= 2	| => t aprtine O(n^2)
+
+Ordinul lui f ne furnizeaza o margine superioara pentru timpul necesar executiei unui algoritm. Daca dorim sa avem
+si o marginire inferioara timpului necesar de exec a alg atunci folosim notatia O(f)
+
+Ω(f) = {g:N -> R+} exista c apartine R+, exista n0 apartine N
+	astfel incat pt oricare ar fi n >= n0 sa avem g(n) >= c * f(n)}
+
+O estimare exacta a timpului de executie al unui algoritm se face marginindu-l atat inferior cat si superior cu un 
+multiplu real pozitiv al aceleiasi functii.
+
+Θ(f) = O(f) ∩ Ω(f) -> ordinul exact al lui f
+
+
+Tehnici de determinare a complexitatii unui algoritm
+*numaram nr de operatii
+
+ex: Sortarea prin selectie
+
+start 												Timp necesar unei operatii		Nr de operatii
+	citeste n													a					1
+	pentru i = 0, n - 1											
+		citeste a[i]											a					n
+	pentru i = 0, n - 2																
+		pozMin = i												b					n - 1
+		pentru j = i + 1, n - 1
+			daca a[j] < a[pozMin] atunci  -> instructiune barometru			c			suma de la 0,n-1 (n-i+1)= 	
+				pozMin = a[j]												suma de (n * (n-1) / 2)
+		aux = a[i]												b					n - 1
+		a[i] = pozMin											b					n - 1	
+		pozMin = aux											b					n - 1
+	pentru i = 0, n - 1	
+		scrie a[i]												d					n
+stop
+	
+t(n) 	= a + a * n + b * (n - 1) + c * (n * (n - 1)) / 2 + b * (n - 1) + b * (n - 1) + b*(n - 1) + d * n
+	= a + a * n + b * n - b + c / 2 * n^2 - c / 2 * n + 3 * b * n - 3 * b + d * n
+	= c / 2 * n^2 + (a + 4 * b - c / 2 + d) * n + a - 4 * b 
+
+=> t(n) apartine Θ(n^2)
+
+Obs: 	-complexitatea alg se poate det mai usor calculand timpul necesar executiei instructiunii barometru
+	-instructiunea barometru este cea care se efectueaza de cele mai multe ori
+	-in genereal instr barometru se cauta dintre instr care se gasesc in nr max de instr repetitive implicate 
+
+Ex. instructiunea barometrului este: daca a[j] < a[pozMin] atunci
+	t(n) = c * (n *(n - 1)) / 2 = c / 2 * n^2 - c / 2 * n = Θ(n^2)
+
+Teorema master 
+
+daca t(n) = a * t(n / b) + c * n, unde b, k apartin N, b >= 2, a,c apartin R+, pt n >= n0, n0 apartine N atunci:
+	{ Θ(n^k)		,	a < b^k			
+t = 	{ Θ(n^k * log n)	,	a = b^k
+	{ Θ(n^lognk)	,	a > b^k
+
+Ex:
+suma elem unui vector de lg n cu divide et impera 
+	t(n) = 2 * t(n/2) + c * n^2	  		a > b^k |
+	a = 2^n, b = 2, k = 0				2 > 2^0 | => t = Θ(n)
+										
+Cautarea binara 
+
+t(n) = t(n/2) + c
+a = 1, b = 2, k = 0
+
+a = b^k |
+1 = 2^0 | => k = Θ(log n)
+
+Mergesort 
+
+t(n) = 2 * t * (n / 2) + c * n
+a = 2, b = 2, k = 1
+
+a = b^k => t(n) = Θ(n * log n)

@@ -1,0 +1,168 @@
+AF - 03.11.2022 
+
+Proceduri recursive 
+
+Ex: se citesc nr de la tastatura pana la intalnirea unui 0, sa se afiseze nr in ordinea inversa citirii lor
+ 
+in: 	3 5 2 7 0
+out: 	7 2 5 3
+
+procdura inversare 
+	citeste x
+	daca x != 0 atunci
+		inversare 
+		scrie x
+
+Obs:	
+!!! x trebuie sa fie o variabila locala procedurii !!!
+
+
+Divide et impera
+
+-principiul de elaborare al algoritmilor este urmatorul: 
+
+Se imparte metoda de rezolvat in 2 sau mai multe subprobleme, se rezolva acestea, iar solutiile lor se combina 
+obtinandu-se astfel solutia problemei initiale  
+
+Subroblemele se rezolva in acelasi mod, adica impartindu-le in 2 sau mai multe subpropleme rezolvandu-le pe acestea
+si apoi combinand solutiile lor, obtinand astfel solutiile subproblemelor. 
+
+Acest procedeu de impartire a problemelor in subprobleme se continua pana cand ajungem la subpropleme de dimensiuni 
+suficient de mici, incat sa admita o rezolvare directa. 
+
+Obs: Nu orice problema poate fi rezolvata aplicand strategia divide et impera! Pentru ca o problema sa poata fi 
+rezolvata cu divide et impera, ea trebuie sa poata fi impartita (relativ usor) in 2 sau mai mule subprobleme, iar 
+solutia problemei trebuie sa se poata obtina (relativ usor) combinand solutiile subproblemelor in care ea a fost 
+impartita.
+
+procedura divImp (P)
+	daca P este suficient de simpla atunci
+		P se rezolva direct (fara apel recursiv)
+	altfel
+		divide (P, P1, P2)
+		divImp (P1)
+		divImp (P2)
+		combina (P1, P2)
+return
+
+Abordarea Divide et impera presupune efectuarea la fiecare nivel de recursivitate, a urmatorilor 3 pasi:
+
+1. Divide problema in 2 sau mai multe subprobleme 
+2. Cucereste subproblemele prin rezolvarea lor recursiva
+3. Combina solutiile subproblemelor pentru a obtine solutia problemei
+
+Ex: Suma elementelor unui sir de lungime n
+
+1. Divide sirul de lungime n in 2 subsiruri de lungime n/2
+2. Cucereste cele 2 subsiruri -> determina recursiv sumele elementelor lor
+3. Combina -> aduna cele 2 sume pentru a obtine suma sirului de lungime n
+
+functie sumaDi (p, u)		p - indicele primului el. din subsir, u - indicele ultimului el. din subsir
+	daca p = u atunci 
+		return a[p]
+	altfel	
+		m = (p + u) / 2
+		return sumaDi (p, m) + sumaDi (m + 1, u)
+
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	scrie sumaDi (0, n - 1)
+stop
+
+
+n = 7 
+2 4 -5 3 2 1 8
+p = 0, u = 6
+
+2 4 -5 3
+p = 0, u = 3
+
+2 4 
+p = 0, u = 1
+
+2
+p = 0, u = 0
+
+4 
+p = 1, u = 1
+
+
+Probleme clasice care se rezolva cu Divide et impera
+
+Cautarea binara :
+
+-se da un sir de n elemente ordonate crescator, sa se determine daca o valoare data x se gaseste in sir, daca da pe
+ce pozitie
+
+1. Divide sirul de lungime n in 2 subsiruri de lungime n/2
+2. Cucereste -> cauta elem x in primul si in al 2 lea subsir in functie de cum este fata de elem din mijlocul 
+sirului(>,<)
+3. Combina: nu exista
+
+functie cautBin (p, u, x)
+	daca p <= u atunci 
+		m = (p + u) / 2
+		daca x = a[m] atunci
+			return m
+		altfel
+			daca x < a[m] atunci
+				return cautBin (p, m - 1)
+			altfel
+				return cautBin (m + 1, u)
+	altfel
+		return -1
+
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	poz = cautBin (0, n - 1, x)
+	daca poz = -1 atunci
+		scrie "nu exista"
+	altfel
+		scrie poz
+stop
+
+/*	daca cautBin (0, n - 1, x) = -1 atunci
+		scrie "nu exista"
+	altfel
+		scrie cautBin (0, n - 1, x)
+*\ !!neeficient!!
+
+
+2. Sortarea prin interclasare (mergesort)
+
+pasi:
+1. Divide sirul de lungime n in 2 subsiruri de lungime n/2
+2. Cucereste -> sorteaza cele 2 subsiruri cu mergesort prin apeluri recursive
+3. Combina -> interclaseaza cele 2 subsiruri sortate pt a obtine intregul sir sortat
+
+procedura mergesort (p, u)
+	daca p < u atunci
+		m = (p + u) / 2
+		mergesort (p, m)
+		mergesort (m + 1, u)
+		interclasare (p, m, u)
+
+//procedura interclasare -> cursul viitor
+
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	mergesort (0, n - 1)
+	pentru i = 0, n - 1
+		scrie a[i]
+stop
+
+
+
+
+
+
+

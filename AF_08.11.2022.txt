@@ -1,0 +1,155 @@
+AF - 08.11.2022
+
+n = 1234
+		{ suma (n / 10) + n % 10
+suma (n) =	{ 
+		{ 0, n = 0
+
+functia sumcif (n)
+	daca n = 0 atunci 
+		return 0
+	return sumcif (n / 10) + n % 10
+
+start 
+	citeste x
+	scrie sumcif (x)
+stop
+
+/*
+functia sumcif (n)
+	daca n <= 9 atunci 
+		return n
+	return sumcif (n / 10) + n % 10
+*\
+
+
+		  { produs (n / 10) * n % 10, n > 9
+produs (n) = { 
+		  { n, n <= 9
+
+functia prodcif (n)
+	daca n <= 9 atunci 
+		return n
+	return prodcif (n / 10) * n % 10
+
+              
+-sa se det. nr de cifre impare ale unui nr nat. n
+
+		{ nrimp (n / 10) + n%2, n > 9
+nrimp (n)= { 
+		{ n % 2, n <= 9
+
+functia nrimp (n)
+	daca n <= 9 atunci 
+		return n % 2
+	return nrimp (n / 10) + n % 2
+
+- scrieti o functie recursiva pentru a determina suma elem unui vector
+
+n = 5 
+a = 1, 2, -5, 4, 7
+
+		{ v[i], daca i = n - 1
+suma (i) =	{ 
+		{ suma (i + 1) + v[i], daca i < n - 1
+
+functie suma (i)
+	daca i = n - 1 atunci
+		return v[i]
+	return suma (i + 1) + v[i]
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	scrie suma (0)
+stop
+
+	
+		{ v[i], daca i = 0
+suma (i) =	{ 
+		{ suma (i - 1) + v[i], daca i > 0
+
+functie suma (i)
+	daca i = 0 atunci
+		return v[i]
+	return suma (i - 1) + v[i]
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	scrie suma (n - 1)
+stop
+
+
+- sa se det nr de elem impare dintr un vector
+		{ v[i] % 2, daca i = n - 1 
+nrimp(i) =	{
+		{ nrimp(i + 1) + v[i] % 2, daca i < n - 1
+
+functie nrimp (i)
+	daca i = n - 1 atunci
+		return v[i] % 2
+	return nrimp (i + 1) + v[i] % 2
+
+- citire si afisare recursiva 
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	scrie nrimp (0)
+stop
+
+
+procedura citire (i)
+	daca i < n 
+		citeste a[i]
+		citire (i + 1)
+
+procedura afisare (i)
+	daca i < n 
+		scrie a[i]
+		scrie (i + 1)
+
+start 	
+	citeste n
+	citire (0)
+	aifsare(0)
+stop
+
+
+Divide et impera
+
+- produsul elem unui vector
+
+1. Divide sirul de lg n in 2 subsiruri de lg n / 2
+2. Cucereste subp -> prin apeluri recursive
+3. Combina - inmulteste cele 2 sol ale subproblemelor
+
+functie prodDI (p, u)
+	daca p = u
+		return a[p]
+	m = (p + u) / 2
+	return prodDI (p, m) * prodDI (m + 1, u)
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	scrie prodDI (0, n - 1)
+ 
+
+- sa se det. nr de elem poz dintr un vector de lg n
+
+functie nrpozDI (p, u)
+	daca p = u
+		daca a[p] > 0
+			return 1
+		altfel 
+			return 0
+	m = (p + u) / 2
+	return nrpozDI (p, m) + nrpozDI (m + 1, u)
+
+

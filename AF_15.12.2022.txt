@@ -1,0 +1,124 @@
+AF - 15.12.2022
+
+Metoda Greedy 
+
+Se foloseste pentru a rezolva probleme de otimizare. Problemele de optimizare sunt acele probleme in care se urmareste determinarea
+minimului sau maximului unei functii obiectiv.  
+
+Un algoritm Greedy construieste solutii pas cu pas in urma unei succesiuni de alegeri. In fiecare moment de decizie este ales cel
+mai bun candidat. Daca acesta poate fi adaugat multimii de candidati selectati (care la inceput e Ø) atunci este adaugat/selectat 
+si va ramane in multimea candidatilor selectati pana la finalul algoritmului. In caz contrar nu va mai fi niciodata considerat. 
+De fiecare data cand adaugam un candidat la multimea candidatilor selectati, verificam daca am obtinut o solutie (nu neaparat
+optima a problemei). In cazul in care algoritmul Greedy a fost folosit corect, prima solutie va fi o solutie optima a problemei.
+Nu orice problema de optimizare poate fi rezolvata folosind metoda Greedy. In general, o problema care poate fi abordata cu Greedy
+are urmatoarele componente: 
+	- o multime de candidati (c)
+	- o functie care determina cel mai promitator candidat dintre cei neconsiderati inca (select)
+	- o functie care verifica daca o multime de candidati selectati poate fi completata pt a forma o solutie nu neaparat optima 
+a problemei (fezabila) 
+	- o functie care verifica daca o multime de candidati selectati formeaza o solutie nu neaparat optima a problemei (solutie)
+	- o functie obiectiva care da valoarea unei solutii si pe care problema ne cere sa o optimizam (min/max) 
+
+procedura Greedy (c)		<- multimea de candidati
+	s = Ø			// s - multimea de candidati selectati
+	cat timp !solutie (s) si c != 0
+		x = select (c)
+		c = c \ {x}
+		daca fezabil (s ∪ {x}) atunci
+			s = s ∪ {x}
+	daca solutie (s) atunci 
+		afisare Sol (s)
+	altfel
+		scrie "nu executa solutie"
+
+Asemanari si deosebiri fata de backtracking: (in general) 
+	- ambele reprezinta solutia sub forma de vector
+	- ambele genereza toate solutiile pentru a o alege pe cea optima 
+	- daca backtracking genereaza tOate solutiile, greedy genereaza doar una (complexitate mai buna)
+	
+Probleme clasice:
+
+- planificarea acitvitatilor (Se dau n activitati pentru care se cunosc timpii de inceput si timpii de sfarsit. Acestea folosesc
+o resursa comuna. Se cere sa se planifice cat mai multe (-> pb de optimizare) activitati cu restrictia ca ele nu se pot suprapune.
+-> fezabil 
+
+n, activitatea i se desfasoara in intervalul (s[i], t[i]), oricare ar fi i=0,n-1
+
+Strategie: cel mai bun cadidat este cel care o termina cel mai repede. Vom sorta candidatii dupa timpii lor. 
+ 
+procedura quicksort (p, u)
+	daca p < u atunci
+		m = partitionare (p, u)
+		quicksort (p, m - 1)
+		quicksort (m + 1, u)
+
+	
+functia partitionare (p, u) 
+	pivot = t[u]
+	i = p
+	pentru j = p, u - 1
+		daca t[j] < pivot atunci
+			aux = t[i]
+			t[i] = t[j]
+			t[j] = aux
+			aux = s[i]
+			s[i] = s[j]
+			s[j] = aux
+			i = i + 1
+	aux = t[u]
+	t[u] = t[i]
+	t[i] = aux
+	aux = s[u]
+	s[u] = s[i]
+	s[i] = aux
+	return i
+
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste s[i], t[i]
+	quicksort (0, n - 1)
+	i = 0 	// i -> ultima acivitate planificata
+	scrie "activitatea care incepe la ", s[0] ", si o termina la ", t[0]
+	pentru j = 1, n - 1
+		daca s[j] >= t[i] atunci 	//fezabil
+			scrie "activitatea care incepe la ", s[j], " si care o termina la ", t[j]
+			i = j
+stop
+			
+
+- problema rucsacului (Un excursionist are la dispozitie un rucsac de capacitate gr si n obiecte. Pt fiecare obiect i se cunosc
+greutatea ca g[i] si castigul transportat c[i]. Sa se determine o incarcare care maximizeaza castigul total. Greutatea totala a
+obiectelor nu poate fi mai mare decat capacitatea.)
+Obiectul poate fi impartit: 
+ob i | 0 1 2 3
+_____|________
+c[i] | 4 3 7 5 
+g[i] | 2 1 3 2
+     | 
+	 co = 10
+
+-intai sortam obiectele descrescator dupa raportul dintre castiguri so greutatea lor c / g
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste c[i], g[i]
+	citeste gr
+	quicksort (0, n - 1)
+	co = 0	//castigul total
+	cat timp i < n si gr > 0
+		daca g[i] <= gr atunci
+			scrie "obiectul cu castigul ", c[i], " si greutatea ", g[i], " in intregime"
+			co = co + c[i]
+			gr = gr - g[i]
+			i = i + 1
+		altfel
+			scrie gr / g[i], " din obiectul cu castigul ", c[i], " si cu greutatea ", g[i]
+			co = co + gr / g[i] + c[i]
+			gr = o
+	scrie co
+stop 
+
+	

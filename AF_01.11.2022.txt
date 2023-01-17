@@ -1,0 +1,67 @@
+AF - 01.11.2022
+
+Subprograme pentru:
+
+1. determinarea minimului 
+
+functie minim (a, b)
+	daca a < b atunci
+		return a
+	return b
+
+obs: parametrii a si b pot fi transmisi atat prin valoare cat si prin referinta
+
+2. scrieti un subprogram care sa det suma cifrelor unui nr nat n
+
+functie suma (n)
+	s = 0
+	cat timp n > 0 executa
+		s += n%10
+		n /= 10
+	return s
+
+obs: parametru n se transmite prin valoare
+
+3. sa se determine suma elem unui vector de lungime n
+
+functie suma_elem (v[], n)
+	s = 0
+	pentru i = 0, n - 1
+		s += v[i]
+	return s
+
+4. sa se verif daca vectorul este sortat crescator sau nu 
+
+functie sortat (v[], n)
+	pentru i = 0, n - 2
+		daca a[i] > a[i + 1]
+			return false
+	return true
+
+pr 3
+import java.util.Scanner;
+
+public class SumaelemSubprogram {
+
+	public static int suma(int a[],int n){
+		int s=0;
+		for(int i=0;i<n;i++)
+			s+=a[i];
+		return s;
+	}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("n=");
+		int n = sc.nextInt();
+		int[] a = new int[n];
+		System.out.println("Elem vect ");
+		for (int i = 0; i < n; i++) 
+		{
+				a[i] = sc.nextInt();
+				
+		}	
+			System.out.print(suma(a,n));
+
+	}
+
+}

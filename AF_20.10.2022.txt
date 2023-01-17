@@ -1,0 +1,161 @@
+20.10.2022 - AF
+
+
+Sortarea prin numarare
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+		c[i] = a[i]	//copie a sirului de sortat
+		b[i] = 0		//sirul in care vom determina pozitiile in sirul sortat
+	pentru i = 0, n - 2
+		pentru j = i + 1, n - 1
+			daca a[i] < a[j] atunci
+				b[j] = b[j] + 1
+			altfel 
+				b[i] = b[i] + 1
+	pentru i = 0, n - 1
+		a[b[i]] = c[i]
+	pentru i = 0, n - 1
+		scrie a[i]
+stop	
+		
+
+ex:	n=5	a=(1, 7, 2, 9, 3)	a=(1, 2, 3, 7, 9)
+		c=(1, 7, 2, 9, 3)
+		b=(0, 0, 0, 0, 0)	b=(0, 1, 1, 1, 1)	b=(0, 2, 1, 2, 1)	b=(0, 3, 1, 3, 2) 	b=(0, 3, 1, 4, 2)
+
+Matrice
+
+-o matrice contine un nr finit de valori de acelasi tip asezate tabelar; valorile se numesc elementele matricii si
+sunt identificate in mod unic prin intermediul a 2 indici: un indice de linie si unul de coloana
+
+matrice cu n linii si cu m coloane		pentru i = 0, n - 1 //pt linii
+	(a_00 a_01 ... a_0m-1) 			pentru j = 0, m - 1 //pt col
+	(a_10 a_11 ... a_1m-1)				se prelucreaza a[i][j]
+	(.				)
+a=	(.				)
+	(.				)
+	(a_m-10 a_m-11 ... a_n-1,m-1)	
+
+Parcurgeri de matrice
+
+1) Parcurgeri pe linii
+ex: -se citeste o matrice cu n lin si cu m col, sa se det suma elementelor date
+
+start 
+	citeste n, m
+	s = 0
+	pentru i = 0, n - 1
+		pentru j = 0, m - 1
+			citeste a[i][j]
+			s = s + a[i][j]
+	scrie s
+stop	
+
+2) Parcurgerea pe coloane 
+
+pentru j = 0, m - 1
+	pentru i = 0, n - 1
+		se prelucreaza a[i][j]
+		
+Matrice patratice
+
+nr linii = nr coloane
+
+	(a_00 a_01 ... a_0,n-1) 			
+	(a_10 a_11 ... a_1,n-1)				
+	(.				)
+a=	(.				)
+	(.				)
+	(a_n-1,0 a_n-1,1 ... a_n-1,n-1)
+
+Parcurgeri de matrice patratice:
+-parcurgerea pe linii
+-parcurgerea pe coloane
+-parcurgerea pe diagonale si in paralele delimitate de acestea
+
+a) Parcurgerea digaonalei principale (i = j)
+
+pentru i = 0, n - 1
+	se prelucreaza a[i][j]
+
+ex: -se citeste o matr patratica cu n linii sa se det maximul elem de pe diag sa principala
+
+start 
+	citeste n
+	pentru  i = 0, n - 1
+		pentru j = 0, n - 1
+			citeste a[i][j]
+	max = a[0][0]
+	pentru i = 1, n - 1
+		daca a[i][i] > max atunci
+			max = a[1][1]
+	scrie max
+stop	
+
+b) parcurgerea zonei de sub diag principala (exclusiv diag princ)
+
+pentru i = 1, n - 1
+	pentru j = 0, i - 1
+		se prelucreaza a[i][j]
+
+
+ex: -maximul elem negative de sub diag princip a unei matrici
+
+start 
+	citeste n
+	pentru  i = 0, n - 1
+		pentru j = 0, n - 1
+			citeste a[i][j]
+	max = -infinit
+	pentru i = 1, n - 1
+		pentru j = 0, i - 1
+			daca a[i][j] > max si a[i][j] < 0 atunci
+				max = a[i][j]
+	scrie max
+stop
+	
+c) Parcurgerea zonei de deasupra diag principale (exclusiv diag princ)
+
+pentru i = 0, n - 2
+	pentru j = i + 1, n - 1
+		se prelucreaza a[i][j]
+
+d) Parcurgerea diagonalei secundare 
+
+j = n - i - 1
+a[i][n - i - 1]
+	
+pentru i = 0, n - 1
+	se prelucr a[i][n - i - 1]
+
+e) Parcurgerea zonei de deasupra diag secundare (exclusiv diag secundara)
+
+pentru i = 0, n - 2
+	pentru j = 0, n - i - 2
+		se prelucreza a[i][j]
+
+f) Parcurgerea zonei de sub diag secundara (exclusiv diag secundara)
+
+pentru i = 1, n - 1
+	pentru j = n - i
+		se prelucreaza a[i][j]
+
+Parcurgerea zonelor delimitate de ambele diagonale in functie de paritate
+
+g) Parcurgerea triunghiului din N
+
+pentru i = 0, (n - 1) \ 2 - 1
+	pentru j = i + 1, n - i - 2
+		se prelucreaza a[i][j]
+
+h) Parcurgerea triungiului din S
+	
+
+i) Parcurgerea triungiului din E
+
+
+j) Parcurgerea triungiului din V
+

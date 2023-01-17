@@ -1,0 +1,162 @@
+06.10.2022 - AF
+
+Algoritmi fundamentali
+
+"Introduction to Algoritmus"
+
+Algoritm = o metoda precisa care poate fi utilizata de un calculator pentru a rezolva o intreaga clasa de probleme 
+Un algoritm este format dintr-un nr finit de pasi, fiecare pas constand dintr-una sau mai multe operatii. 
+Operatiile trebuie sa fie bine definite si fezabile (fezabil - care se poate face). 
+Spunem despe o operatie ca este bine definita daca este clar ceea ce este de facut. Spunem despre o operatie ca este fezabila,
+daca poate fi efectuata de un om folosind hartia si creionul. Un algoritm preia 0 sau mai multe date de intrare (efectueaza 
+prelucrari precise asupra lor si furnizeaza una sau mai multe date de iesire).
+
+Reprezentarea algoritmilor
+
+Pseudocod (limbaj algoritmic)
+Un algoritm in pseudocod este o succesiune de instructiuni care se executa in ordinea in care au fost scrise.
+
+Tipuri de instructiuni: 
+
+1. Inceput / sfarsitul algoritmului sunt marcate de instructiunile start, respectiv stop.
+
+2. Instructiunile de citire sunt sub forma: 
+citeste x1, x2, ..., xn (unde x1, ..., xn sunt variabile)
+
+O variabila este o componenta a algorimtului a carei valoare se poate modifica pe parcursul executiei lui. Variabilele sunt
+identificate cu ajutorul unui nume format din litere si cifre, primul caracter fiind o litera.
+Efectul instructiunii de citire este incarcarea datelor de intrare in variabilele x1, x2, ..., xn.
+
+3. Instructiunea de scriere cu forma:
+scrie a1, a2, ..., an 
+
+Un mesaj este un text cuprins intre ghilimele (""). Efectul intrctiunii este afisarea continutlui variabilelor si a textului
+mesajelor.
+
+4. Instructiunea de atribuire are forma:
+v <- e
+unde v - variabila, iar e - expresie
+
+Efectul instructiunii: se evalueaza expresia e si valoarea acesteia se atribuie variabilei v
+
+5. Interschimbarea a 2 variabile
+
+start 
+	citeste a, b
+	aux <- a
+	a <- b
+	b <- aux
+	scrie a, b
+stop
+
+6. Instructiunea de ramificare
+
+-daca p atunci 
+|	instructiuni_1 
+|altfel 
+|	instructiuni_2
+L
+
+unde p - conditie logica 
+Efectul intructiunii: se evalueaza daca conditia logica p este adevarata, atunci se efectueaza grupul de instructiuni instr_1,
+altfel se efectueza gr de instr instr_2
+Observatie: grupul de instr_2 poate lipsi, iar in aceste caz forma de ramificare este:
+
+-daca p atunci
+|	instructiuni_1
+L
+
+Ex: determinarea modulului unui nr real x
+
+start 
+	citeste x
+	-daca x >= 0 atunci
+	|	m <- x
+	|altfel 
+	|	m <- -x
+	L
+	scrie m
+stop
+
+7. Instructiuni repetitive 
+-cat timp p executa
+|	instructiuni
+L
+
+-repeta 
+|	instructiuni 
+Lpana cand p
+
+Grupul de instr va fi efectuat de 0 sau mai multe ori in functie de valoarea lui p
+Efectul instr cat timp: mai intai se evalueaza conditia logica p si apoi grupul de instr se executa cat timp conditia p 
+ramane adevarata
+
+Obs: daca initial conditia era falsa, atunci grupul de instr nu se va executa niciodata
+
+Efectul instr repeta: se efectueaza o data grupul de instr, apoi se evalueaza conditia logica p si se repeta efectuarea grupului
+de instr pana cand p devine adevarat
+
+Ex: determinarea partii intregi a unui nr real pozitiv
+
+start
+	citeste x
+	n <- 0
+	-cat timp n + 1 <= x
+	|	n <- n + 1
+	L
+	scrie n
+stop
+	
+Ex: determinarea sumei a n nr naturale:
+
+start 
+	citeste n
+	s <- 0
+	-cat timp n > 0
+	|	citeste x
+	|	s <- s + x
+	|	n <- n - 1
+	L
+	scrie s
+stop
+
+start 
+	citeste n
+	s <- 0
+	i <- 1
+	-cat timp i <= n
+	|	citeste x
+	|	s <- x + x
+	|	i <- i + 1
+	L
+	scrie s
+stop
+
+Instructiunea "pentru" cu forma:
+
+-pentru contor = vi, vf, [pas]
+|	instructiuni
+L
+
+*vi - valoare initiala, vf - valoare finala
+Obs: daca pas = 1, poate sa nu fie precizat
+Obs: este posibil ca valoarea vi sa fie mai mare decat vf, caz in care pasul este negativ
+
+start 
+	citeste n
+	s <- 0 
+	-pentru i = 1, n
+	|	citeste x
+	L
+	scrie s
+stop
+
+Programarea structurata: 
+
+Fluxul de instructiuni se poate efectua in 3 moduri: 
+1. secventa -> instructiunile se executa in ordinea in care au fost scrise (interschimbarea)
+2. ramificarea -> permite alegerea spre a fi executat a unui grup de instructiuni dintre 2 grupuri de instructiuni in functie de
+valoarea unei conditii logice (modulul unui numar)
+3. iteratia -> executarea de 0 sau mai multe ori a unui grup de instructiuni in functie de valoarea unei conditii logice 
+(suma a n nr)
+

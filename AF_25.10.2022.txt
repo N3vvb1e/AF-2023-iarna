@@ -1,0 +1,175 @@
+25.10.2022 - AF
+
+-se da o matrice cu n linii si m coloane, sa se det produsul fiecarei linii
+
+ex: 	n=2	(1 3 5) 15
+	m=3	(2 6 4) 48
+
+start 
+	citeste n, m
+	pentru i = 0, n - 1
+		pentru j = 0, m - 1
+			citeste a[i][j]
+	pentru i = 0, n - 1
+		p = 1
+ 		pentru j = 0, m - 1
+			p *= a[i][j]
+		scrie p, ' '
+stop
+	
+
+-se citeste o matrice cu n linii si m coloane, sa se det maximul fiecarei coloane
+
+ex: 	n=2	(1 3 5) 
+	m=3	(2 6 4) 
+	max:	2 6 5
+
+start 
+	citeste n, m
+	pentru i = 0, n - 1
+		pentru j = 0, m - 1
+			citeste a[i][j]
+	pentru j = 0, m - 1
+		max = -infinit
+		pentru i = 0, n - 1
+			daca a[i][j] > max atunci
+				max = a[i][j]
+		scrie max, ' '
+stop
+
+
+-se citeste o matrice patratica cu n linii, determinati produsul elem nenule de pe
+diag principala
+
+ex: 	n = 3
+	(1 0 3)
+a=	(5 0 2)
+	(4 4 7)
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		pentru j = 0, n - 1
+			citeste a[i][j]
+	p = 1
+	nenul = false
+	pentru i = 0, n - 1
+		daca a[i][i] != 0 atunci
+			p *= a[i][i]
+			nenul = true
+	daca nenul atunci
+		scrie p
+	altfel
+		scrie "nu avem elemente nenule"
+stop
+			
+	
+
+3. daca toate elem de deasupra diag principale sunt nenule
+
+import java.util.Scanner;
+public class ToateNenuleDeasupraDPrincipale {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("n= ");
+		int n=sc.nextInt();
+		boolean exista=true;
+		int [][]a=new int[n][n];
+		for(int i=0;i<n;i++)
+		{
+			for(int j=0;j<n;j++)
+			{
+				a[i][j]=sc.nextInt();
+			}
+		}
+		for(int i=0;i<n-1;i++)
+		{
+			for(int j=i+1;j<n;j++)
+			{
+				if(a[i][j]!=0)
+				{
+					exista=false;
+					break;
+				}
+			}
+		}
+		if(exista == true)
+		 System.out.print("toate sunt nenule");
+		else
+			System.out.print("nu toate elem sunt nenule");
+	}
+}
+
+5. daca sub diag sec sunt doar nr pare
+
+prob 5 
+import java.util.Scanner;
+public class DacaSubDSecsuntdoarpare {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("n= ");
+		int n=sc.nextInt();
+		boolean exista=true;
+		int [][]a=new int[n][n];
+		for(int i=0;i<n;i++)
+		{
+			for(int j=0;j<n;j++)
+			{
+				a[i][j]=sc.nextInt();
+			}
+		}
+		for(int i=0;i<n;i++)
+		{
+			for(int j=0;j<n;j++)
+			{
+			   if(i+j>n-1)	
+				if(a[i][j]%2==1)
+				{
+					exista=false;
+					break;
+				}
+			}
+		}
+		if(exista == true)
+		 System.out.print("toate sunt pare");
+		else
+			System.out.print("nu toate elem sunt pare");
+	}
+}
+
+
+7. produsul elem din tr din sud
+ 
+import java.util.Scanner;
+public class ProdTRIUNGHISud {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("n= ");
+		int n=sc.nextInt();
+		int p=1;
+		boolean exista=true;
+		int [][]a=new int[n][n];
+		for(int i=0;i<n;i++)
+		{
+			for(int j=0;j<n;j++)
+			{
+				a[i][j]=sc.nextInt();
+			}
+		}
+		for(int i=0;i<n;i++)
+		{
+			for(int j=0;j<n;j++)
+			{
+			   if(i+j>n-1 && i>j)	
+			   {
+				   p*=a[i][j];
+			   }
+			}
+		}
+		 System.out.print(p);
+	}
+}
+
+9. daca toate elem sunt % cu 5 in tr din vest
+
+10. parcurgere in spirala

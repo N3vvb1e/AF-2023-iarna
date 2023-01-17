@@ -1,0 +1,96 @@
+AF - 13.12.2022
+
+Pb. calului: 
+
+- se da o tabla generalizata de sah n x n, se cere sa se acopere in toate modurile posibile cu un cal care pleaca din
+coltul stanga sus si trece prin fiecare celula/patratica exact o data.
+
+procedura back_rec (k, l, c)
+	daca 0 <= l si l <= n - 1 si 0 <= c si c <= n - 1 si x[l][c] = 0 atunci
+		x[l][c] = k
+		daca k = n * n atunci 
+					retineSol
+		altfel
+			back_rec(k + 1, l - 1, c - 2)
+			back_rec(k + 1, l - 2, c - 1)
+			back_rec(k + 1, l - 2, c + 1)
+			back_rec(k + 1, l - 1, c + 2)
+			back_rec(k + 1, l + 1, c + 2)
+			back_rec(k + 1, l + 2, c + 1)
+			back_rec(k + 1, l + 2, c - 1)
+			back_rec(k + 1, l + 1, c - 2)
+		x[l][c] = 0;
+
+//back_rec (1, 0, 0)
+
+
+Plata unei sume de bani
+
+-sa se plateasca in toate modurile posibile suma s, avand la dispozitie n tipuri de monede in cantitati nelimitate
+n = 3		v = (1, 5, 10) 		s = 12
+		    12  
+		     7  2
+		     2  0   1
+			7  1
+
+x = (x0, ..., xn-1)
+v[i] - sirul de monede de val v[i], oricare ar fi i=0,n-1
+x[i] apartine {0, 1, ..., s / v[i]}
+
+Cond. interne: suma de la 0 la n - 1 de (x[i] * v[i]) = s
+
+procedura back_rec (k, sp)
+	daca sp = s atunci
+		retineSol (k)
+	altfel
+		daca k < n atunci
+			pentru v[k] = 0, s / v[k]
+				daca sp + x[k] * v[k] <= s atunci
+					back_rec(k + 1, sp + x[k] * v[k])
+
+procedura retineSol (k)
+	pentru i = 0, k - 1
+		daca x[i] != 0 atunci
+			scrie x[i], "monede de" v[i]
+
+					
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste v[i]
+	citeste s
+	back_rec(0,0)
+stop
+
+
+//daca vrei minim de monede
+
+procedura back_rec (k, sp, nm)
+	daca sp = s atunci
+		retineSol(k, nm)
+	altfel
+		daca k < n atunci
+			pentru v[k] = 0, s / v[k]
+				daca sp + x[k] * v[k] <= s atunci
+					back_rec(k + 1, sp + x[k] * v[k], nm + x[k])
+
+procedura retineSol (k, nm)
+	daca nm < nrmin
+		nrmin = nm
+		lg_min = k
+		pentru i = 0, k - 1
+			xmin[i] = x[i]
+			
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste v[i]
+	citeste s
+	nrmin = infinit
+	back_rec (0, 0, 0)
+	pentru i = 0, lg_min - 1
+		daca xmin[i] != 0 atunci
+			scrie xmin[i], "monede de" v[i]
+stop
+
+	 

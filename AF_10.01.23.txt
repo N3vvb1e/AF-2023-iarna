@@ -1,0 +1,110 @@
+AF - 10.01.23
+
+Greedy 
+
+- se dau 2 vectori de lungime a si b; sa se rearanjeze elelementele lor astfel incat sa se maximizeze suma produselor
+lor
+
+n = 4
+a = {2, 0, 1, 3}
+b = {2, -2, 1, -1}
+
+procedura 	
+	daca p < u atunci
+		m = partitionare (x, p, u)
+		quicksort (x, p, m - 1)
+		quicksort (x, m + 1, u)
+
+
+functie partitionare (x, p, u)
+	pivot = x[u]
+	i = p
+	pentru j = p, u - 1
+		daca x[j] < pivot atunci
+			aux = x[i]
+			x[i] = x[j]
+			x[j] = aux
+			i = i + 1
+	aux = x[i], x[i] = x[u], x[u] = aux
+	return i	
+
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	pentru i = 0, n - 1
+		citeste b[i]
+	quicksort (a, 0, n - 1)
+	quicksort (b, 0, n - 1)
+	s = 0
+	pentru i = 0, n - 1
+		s = s + a[i] * b[i]  // s = s + a[i] * b[n - i - 1]
+		scrie a[i]
+	pentru i = 0, n - 1
+		scrie b[i]
+	scrie s
+stop
+	
+
+
+//suma minima s-ar putea afla sortand crescator unul din vectori, iar pe celalalt descrescator
+
+
+Liste liniare implementate static
+
+public class ListeLiniare {
+	int []x; 
+	int n, dim_max = 8;	
+	
+	ListeLiniare() {
+	x = new int [dim_max];
+	n = 0;
+	}
+		
+	ListeLiniare (int dim) {
+	dim_max = dim;
+	x = new int [dim];
+	n = 0;
+	}
+
+	void adSfarsit (int elem) throws Exception {
+		if (n == dim_max)
+			throw new Exception ("depasit");
+		else
+			x[n++] = elem;
+	}
+	
+	public String toString() {
+		String s = new String ("[");
+		if (n > 0) {
+			for (int i = 0; i < n; i++)
+ 				s += x[i] + ", ";
+		}
+		s += "]";
+		return s;
+	}
+}
+
+
+Cum o folosim: - alt fisier
+
+public class TestListe {
+	public static void main(String [] args) {
+		ListeLiniare l = new ListeLiniare (3);
+		try {
+			l.adSfarsit(5);
+			l.adSfarsit(3);
+			l.adSfarsit(6);
+			l.adSfarsit(4);
+		}
+		catch (Exception e) {
+			System.out.print (e);
+		}
+		System.out.print(l);
+	}
+}
+
+
+
+

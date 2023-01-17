@@ -1,0 +1,109 @@
+AF - 10.11.2022
+
+Divide et impera (continuare)
+
+Sortarea prin interclasare
+
+1. Divide sirul de lungime n in 2 subsiruri de lungime n / 2
+2. Cucereste -> Sorteaza cele 2 subsiruri prin apeluri recursive
+3. Combina cele 2 subsiruri sortate pt a obtine sirul intreg sortat (aceasta operatie se numeste interclasare)
+
+procedura mergesort (p, u)
+	daca p < u atunci
+		m = (p + u) / 2
+		mergesort (p, m) 
+		mergesort (m + 1, u)
+		interclasare (p, m, u)
+	
+procedura interclasare (p, m, u)
+	i = p
+ 	j = m + 1
+	k = 0					//p...u -> u - p + 1 elem
+	cat timp i <= m si j <= u
+		daca a[i] < a[j] atunci
+			b[k] = a[i]
+			i = i + 1
+		altfel
+			b[k] = a[j]
+			j = j + 1
+		k = k + 1
+	pentru l = i, m
+		b[k] = a[l]
+		k = k + 1
+	pentru l = j, u
+		b[k] = a[l]
+		k = k + 1
+	pentru i = 0, k - 1
+		a[p + i] = b[i] 
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	mergesort (0, n - 1)
+	pentru i = 0, n - 1
+		scrie a[i] 
+stop
+	
+in: 
+n = 7
+a = 5, 2, 1, 4, 7, 3, 9
+  p=0      m=3      u=6
+
+p=0, m=1, u=3
+5 2 1 4 
+
+p=0 u=1
+5 2
+
+p=0=u		p=1=u
+5		2
+    
+
+Sortarea rapida (Quicksort)
+
+1. Divide sirul de lungime n in 2 subsiruri: unul cu elemente mai mici decat pivotul, celalalt cu elem mai mari 
+decat pivotul (pivotul putand fi un elem al sirului, noi alegandu-l pe ultimul)
+2. Cucereste -> sorteaza cele 2 subsiruri prin apeluri recursive
+3. Combina -> nu e necesar
+
+procedura quicksort (p, u)
+	daca p < u atunci 
+		m = partitionare (p, u)
+		quicksort (p, m - 1)
+		quicksort (m + 1, u)
+	
+functie partitionare (p, u)
+	pivot = a[u]	//a[p]
+	i = p
+	pentru j = p, u - 1
+		daca a[j] < pivot atunci
+			aux = a[i]
+			a[i] = a[j]	
+			a[j] = aux
+			i = i + 1
+	aux = a[i]
+	a[i] = a[u]
+	a[u] = aux
+	return i
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	quicksort (0, n - 1)
+	pentru i = 0, n - 1
+		scrie a[i]
+stop
+
+in: 
+n = 7
+a = 5, 2, 1, 4, 7, 3, 9
+  p=0               u=6  
+pivot=9
+
+p=0, u=5, pivot=3
+5 2 1 4 7 3
+
+	
+		

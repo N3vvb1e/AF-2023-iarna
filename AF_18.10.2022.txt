@@ -1,0 +1,77 @@
+AF - 18.10.2022
+
+Cautare secventiala 
+
+-se dau un vector de lungime n, si un elem y, sa se det daca elem apare in vector si daca da pe ce pozitii
+ex: n=5
+y = 2 se gaseste pe poz 0, 2
+y = 7 -||-
+y = 5 nu se gaseste
+
+
+start
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	citeste y
+	gasit = false
+	pentru i = 0, n - 1
+		daca a[i] = y atunci
+			gasit = true
+			scrie i
+	daca !gasit
+		scrie "nu se gaseste in vector"
+stop
+
+-se citesc 2 multimi reprezentate prin 2 vectori de lungime n, respectiv m, sa se det intersectia lor
+ex: 	in: n=5 a={7, 2, 3, -1, 5}
+	    m=4 b={1, 2, 4, 3}
+	out: 2 3
+
+start
+	citeste n, m
+	pentru i = 0, n - 1
+		citeste a[i]
+	pentru i = 0, m - 1
+		citeste b[i]
+	vida = true
+	pentru i = 0, n - 1
+		pentru j = 0, m - 1
+			daca a[i] = b[j]	atunci 
+				scrie a[i]
+				vida = false	
+				break
+	daca vida = true atunci
+		scrie "multimea vida"
+stop
+
+
+-sa se det reuniunea
+ex: 	in: -||-
+	out: 7 2 3 -1 5 1 4
+
+
+start
+	citeste n, m
+	pentru i = 0, n - 1
+		citeste a[i]
+	pentru i = 0, m - 1
+		citeste b[i]
+	pentru i = 0, n - 1
+		scrie a[i]
+	pentru i = 0, m - 1
+		gasit = false
+		pentru j = 0, n - 1
+			daca b[i] = a[j] atunci
+				gasit = true 
+				break
+		daca !gasit 
+			scrie b[i]
+stop
+
+
+
+
+
+
+

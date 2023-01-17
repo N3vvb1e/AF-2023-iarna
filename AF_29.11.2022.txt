@@ -1,0 +1,51 @@
+AF - 29.11.2022
+
+- se da o tabla generalizata de sah de n x n, sa se aseze pe ea in toate modurile posibile n dame in asa fel incat
+sa nu se atace intre ele
+
+n = 4 
+
+Dama i se aseaza pe linia i si pe coloana xi, oricare ar fi i=0,n-1
+
+x = (x0, x1, ...,xn-1)
+xi - indicele coloanei pe care asezam dama i, oricare ar fi i=0,n-1
+xi apartine {0, 1, ..., n - 1}
+
+Cond.interne: 
+xi != xj, pt i != j
+|xi - xj| != |i - j|, i != j
+
+procedura Backtracking
+	pentru i = 0, n - 1
+		x[i] = -1
+	k = 0
+	cat timp k >= 0
+		daca k = n
+			retineSol
+			k = k -1
+		altfel
+			daca x[k] < n - 1
+				x[k] = x[k] + 1
+				daca continuare (k) atunci
+					k = k + 1
+			altfel 
+				x[k] = -1
+					k = k - 1
+
+functie continuare (k)
+	pentru i = 0, k - 1
+		daca x[k] = x[i] sau |x[k] - x[i]| = k - i atunci
+			return false
+	return true
+
+procedura retineSol
+	pentru i = 0, n - 1
+		scrie "dama ", i, " si linia", i, "coloana" x[i]
+
+start 
+	citeste n
+	Backtracking
+stop
+
+
+

@@ -1,0 +1,124 @@
+22.11.2022 - AF
+
+Divide et impera
+
+- se da un vector cu n elem, sa se verifice daca toate elem sale sunt pare
+
+
+functie toatePare (p, u)
+	daca p = u atunci
+		daca a[p] % 2 = 0
+			return true
+		altfel 
+			return false
+	m = (p + u) / 2
+	return toatePare (p, m) && toatePare (m + 1, u)
+
+start 		
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	daca (toatePare (0, n - 1)) atunci 
+		scrie "toate pare"
+	altfel 
+		scrie "nu sunt toate pare"		
+stop
+
+
+- sa se verif daca un vect de lg n este sortat crescator folosind divImp
+
+functie esteSortat (p, u)
+	daca daca p = u atunci
+		return true 
+	altfel 
+		m = (p + u) / 2 
+		return esteSortat (p, m) && esteSortat (m + 1, u) && a[m] <= a[m + 1] (strict cresc fara = , cresc cu = )
+
+start 
+	citeste n 
+	pentru i = 0, n - 1
+		citeste a[i]
+	daca (esteSortat (0, n - 1)) atunci 
+		scrie "vect este sortat"
+	altfel 
+		scrie "vect nu este sortat"	
+stop
+
+
+- Turnurile din Hanoi
+
+se dau n discuri de diametre diferite asezate in ord descresc de diametru pe o tija; avand la dispozitie o tija
+intermediara, se cere sa se mute cele n discuri pe o a treia tija respectand urm reguli: la fiecare pas se poate 
+muta un singur disc, si nu se poate aseza un disc de diametru mai mare pe un disc cu diametru mai mic
+
+
+procedura Hanoi (n, i, j)		//n - nr de discuri, i - tija de start, j - tija destinatie
+	daca n > 0 atunci
+		Hanoi (n - 1, i, 6 - i - j)
+		scrie "muta un disc de pe " i " pe " j
+		Hanoi (n - 1, 6 - 1 - j, j)
+
+start 	
+	citeste n
+	Hanoi (n, 1, 3)
+stop
+
+
+H(3, 1, 3) -> H(2, 1, 2) -> H(1, 1, 3) -> H(0, 1, 2)		1 -> 3
+H(...
+
+
+
+Backtracking 
+
+- se da o multime cu n elem, sa se afiseze toate permutarile multimii
+
+n = 3
+a = (4, 1, 7)
+
+4 1 7		x = (x0, x1, ..., xn-1)
+4 7 1		xi apartine {0, ..., n - 1} -> indici pt a
+1 4 7		Conditii interne: xi != xj, pt i != j
+1 7 4
+7 4 1
+7 1 4
+
+procedura backtracking 
+	pentru i = 0, n - 1
+		x[i] = -1
+	k = 0
+	cat timp k >= 0 executa
+		daca k = n atunci 
+			retineSol
+			k = k - 1
+		altfel
+			daca x[k] < n - 1 atunci
+				x[k] = x[k] + 1
+				daca continuare (k) atunci	
+					k = k + 1
+			altfel 
+				x[k] = -1
+				k = k - 1
+	
+procedura retineSol
+	pentru i = 0, n - 1
+		scrie a[x[i]]
+	
+
+functie continuare (k)
+	pentru i = 0, k - 1
+		daca x[k] = x[i] atunci
+			return false
+	return true
+
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	backtracking
+stop
+
+
+
+

@@ -1,0 +1,194 @@
+AF - 22.12.2022
+
+Structuri de date
+
+- sunt de 2 categorii:
+
+~ structuri de date statice -> memoria se aloca la inceputul executiei programului si ramane ocupata pana la sf
+executiei lui (chiar daca acele structuri nu se mai folosesc)
+
+~ structuri de date dinamice -> memoria se aloca pe parcursul executiei programului si atunci cand nu mai sunt 
+folosite, memoria se elibereaza 
+Obs: in java, eliberarea memoriei se face automat, mecanismul se numeste -> Garbage collector 
+
+
+Liste liniare
+
+O lista liniara contine un nr finit de elem de acelasi tip pozitionate liniar 
+x0, x1, ..., xn-1 - elem listei
+n - lungimea listei
+Fiecare elem xi are un succesor xi+1 si un predecesor xi-1, oricare ar fi i=1,n-2
+Elem x0 are doar succesor x1
+Elem xn-1 are doar predecesor xn-2
+
+
+Operatii uzuale pe liste liniare:
+
+- crearea unei liste vide
+- verificarea daca o lista este vida
+- adaugarea unui elem intr-o lista (la inceputul listei, la sf listei, pe o pozitie data, inainte/dupa un element dat)
+- stergerea unui elem dintr-o lista (de la inceputul listei, de la sf listei, de pe o pozitie data, inainte de/de dupa 
+un element dat)
+- cautarea unui elem in lista
+- determinarea elementului de pe o pozitie data
+- afisarea continutului listei
+- sortarea elem unei liste
+- concatenarea a 2 sau mai multe liste
+- impartirea unei liste in 2 sau mai multe subliste 
+
+
+Liste liniare implementate static
+
+dim_max -> supraestimare a lungimii listei
+
+dezavantaje: 	- daca dim_max este prea mare -> risipa de memorie
+			- daca dim_max este prea mic -> eroare
+
+x <- new int [dim_max] 	-> memorie care se aloca la inceput si ramane alocata pe tot parcursul programului
+
+n - lungimea listei (nr efectiv de elem din lista)
+
+Crearea unei liste vide:
+
+procedura  creare 
+	n = 0
+
+Verificarea daca lista e vida:
+
+functie eVida				in Java ->		functie eVida 
+	daca n = 0 atunci						return n == 0
+		return true
+	altfel
+		return false
+
+Adaugarea unui elem intr-o lista (la sf listei):
+
+procedura adSfarsit (elem) 		-> adauga la sfarsit 
+	daca n = dim_max atunci
+		eroare (un mesaj sugestiv)
+	atfel
+		x[n] = elem
+		n = n + 1
+
+Adaugarea unui elem intr-o lista (la inceputul listei):
+
+procedura adInceput (elem)
+	daca n = dim_max atunci
+		eroare
+	altfel
+		pentru i = n - 1, 0, -1
+			x[i + 1] = x[i]
+		x[0] = elem
+		n = n + 1 
+
+Adaugarea unui elem intr-o lista (pe o pozitie data):
+
+procedura adPePoz (elem, poz)
+	daca n = dim_max atunci
+		eroare
+	altfel
+		pentru i = n - 1, poz, -1
+			x[i + 1] = x[i]
+		x[poz] = elem
+		n = n + 1 
+
+Stergerea unui elem dintr-o lista (de la inceputul listei):
+
+functie stergeIncep 
+	daca n = 0 atunci
+		Eroare
+	altfel
+		elem = x[0]
+		pentru i = 1, n - 1
+			x[i - 1] = x[i]
+		n = n - 1
+		return elem
+
+Determinarea elem de pe o poz data: 
+
+functia elemDePePoz (poz)
+	daca poz >= n atunci 
+		Eroare
+	altfel
+		return x[poz]
+
+
+Stive (ca niste farfurii puse una peste alta)
+
+- o stiva este o lista liniara in care adaugarile si stergerile se fac in/din acelasi capat, numit varful stivei
+
+x <- new int [dim_max]
+vf <- varful stivei (nr efectiv de elem din stiva)
+
+Operatii specifice pe stiva:
+
+- adaugarea unui elem in varful stivei
+
+procedura push (elem)
+	daca vf = dim_max atunci
+		Eroare 
+	altfel
+ 		x[vf] = elem
+		vf = vf + 1
+
+- eliminare unui elem din stiva
+
+functie pop 
+	daca vf = 0 atunci
+		Eroare
+	altfel
+		vf = vf - 1
+		return x[vf]
+
+- determinarea elem din vf stivei
+
+functie top 
+	daca vf = 0 atunci
+		Eroare
+	altfel
+		return x[vf - 1]
+		
+- afisarea continutului unei stive
+
+procedura afis 
+	scrie "["
+	pentru i = 0, vf - 1
+		scrie x[i]
+	scrie "]"
+
+
+Cozi
+
+- coada este o lista liniara in care adaugarile se fac intr-un capat numit varful cozii, iar stergerile se fac din 
+celalt capat numit capul cozii
+
+Operatii specifice pe coada: 
+
+- adaugarea unui element in varful cozii (identica ca la stiva)
+
+procedura push (elem)
+	daca vf = dim_max atunci
+		Eroare 
+	altfel
+ 		x[vf] = elem
+		vf = vf + 1
+
+- eliminarea primului element din coada
+
+functie delete
+	daca vf = 0 atunci
+		Eroare
+	altfel 
+		elem = x[0] 
+		pentru i = 1, vf - 1
+			x[i - 1] = x[i]
+		vf = vf - 1
+		return elem
+
+- afisarea continutului unei cozi (identica ca la stiva)
+
+procedura afis 
+	scrie "["
+	pentru i = 0, vf - 1
+		scrie x[i]
+	scrie "]"

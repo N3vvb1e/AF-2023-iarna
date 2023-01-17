@@ -1,0 +1,126 @@
+AF - 13.10.2022
+
+Vectori/ Siruri/ Tablouri
+
+O variabila de tip vector contine un numar finit de valori de acelasi tip. Aceste valori se numesc elementele
+vectorului si ele pot fi referite printr-un indice care indica pozitia lor in tablou. 
+
+a = (a[i], i = 0, n - 1)
+
+unde n - numar de elemente din vector = lungime vectorului
+
+exercitii:
+
+1. se citesc n numere, sa se afiseze in ordine inversa citirii lor
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	pentru i = n - 1, 0
+		scrie a[i]
+stop
+
+2. se citeste un vector cu n elemente, sa se det maximul elementelor sale
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	max <- a[0]
+	pentru i = 1, n - 1
+		daca a[i] > max atunci 
+			max = a[i]
+	scrie max
+stop
+
+
+Sortari
+
+Fie a un vector de n elemente, a-l sorta inseamna a-i rearanja elementele in ordine crescatoare sau descrescatoare.
+
+1. Sortarea prin interschimbare (bubblesort)
+
+-se parcurge vectorul si se compara elementele de pe pozitii succesive; cand se gaseste o pereche de elemente intr-o
+ordine nedorita (a[i] > a[i + 1]) atunci aceste valori vor fi interschimbate; parcurgerea vectorului se efectueaza 
+pana cand se realizeaza o trecere prin intreg vectorul fara efectuarea niciunei interschimbare; pemntru a retine 
+daca s-a efectuat vreo interschimbare vom folosi o variabila booleana pe care o initializam cu valoarea true si o
+vom seta ca false de cate ori vom efectua o interschimbare.
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	repeta 
+		eSortat <- true
+		pentru i = 0, n - 2
+			daca a[i] > a[i + 1] atunci
+				a[i] <-> a[i + 1] 	(aux <- a[i]
+								a[i] <- a[i + 1]
+								a[i + 1] <- aux)
+			`	eSortat <- false 
+	pana cand eSortat 
+	pentru i = 0, n - 1
+		scrie a[i]
+stop
+
+ex: 	n = 5
+	a = {1, 7, 2, 9, 3}
+	    {1, 2, 7, 9, 3}
+	    {1, 2, 7, 3, 9}
+	    {1, 2, 3, 7, 9}
+								
+2. Sortarea prin selectie (selectsort)
+
+-se determina elementul minim din vector si se asaza pe prima pozitie; se determina minimul elementelor ramase si se
+asaza pe a 2-a pozitie, samd; 
+
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	pentru i = 0, n - 2	//se asaza pe pozitia i minimul elemntelor a[i], a[i + 1], ..., a[n - 1]
+		pozmin <- i
+		pentru j = i + 1, n - 1
+			daca a[j] < a[pozmin]	atunci
+				pozmin = j
+		a[i] <-> a[pozmin] (interschimbare)
+	pentru i = 0, n - 1
+		scrie a[i]
+stop
+
+ex: 	n = 5
+	a = {1, 7, 2, 9, 3}
+	    {1, 7, 2, 9, 3}
+	    {1, 2, 7, 9, 3}
+	    {1, 2, 3, 9, 7}
+	    {1, 2, 3, 7, 9}
+
+Sortarea prin insertie (insertsort)
+
+-subsirul format din primul element este intotdeauna sortat; la primul pas se insereaza cel de-al doilea elem astfel
+incat sa se obtina un subsir format din 2 elemente in ordine cresc; in acesta se va insera un element astfel incat
+sa se obtina un subsir cresc de lungime 3, samd. 
+
+start 
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+	pentru i = 1, n - 1	//inseram a[i] in subsirul cresc a[0], ..., a[i - 1]
+		aux <- a[i]
+		j <- i - 1
+		cat timp j >= 0 si a[j] > aux executa
+			a[j + 1] = a[j]
+			j <- j - 1
+		a[j + 1] = aux;
+	
+
+ex: 	n = 5
+	a = {1, 7, 2, 9, 3}
+	    {1, 2, 7, 9, 3}
+	    {1, 2, 7, 9, 3}
+	    {1, 2, 3, 7, 9}
+
+
+

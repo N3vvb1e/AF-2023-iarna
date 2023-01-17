@@ -1,0 +1,114 @@
+AF - 06.12.2022
+
+Problema colorarii tarilor
+
+-se da o harta cu n tari prin matricea de vecinatati
+
+V = (Vij) i,j=0,n-1
+
+Vi,j 	= {1 daca tarile i si j sunt vecine
+	= {0, altfel						oricare ar fi i, j = 0,n-1
+
+avand la dispozitie n culori, sa se coloreze harta in toate modurile posibile astfel incat oricare 2 tari vecine sa 
+fie colorate diferit
+
+x = (x0, x1, x2, ..., xn-1)
+xi - indicele valorii termenului i, oricare ar fi 0,n-1
+xi apartine {0, 1, ..., m - 1}, oricare ar fi 0,n-1
+
+Cond. interne: xi ! xj, daca Vij = 1
+
+ex. n = 4	
+	 	{0 1 1 0}	
+	V = 	{1 0 1 1}
+		{1 1 0 1}
+		{0 1 1 0}
+
+procedura Backtracking
+	pentru i = 0, n - 1
+		x[i] = -1 
+	k = 0
+	cat timp k >= 0
+		daca k = n atunci
+			retineSol
+			k = k - 1
+		altfel daca x[k] < m - 1
+			x[k] = x[k] + 1
+			daca continuare(k) atunci
+				k = k + 1
+		altfel 
+			x[k] = -1 
+			k = k - 1
+			
+functie continuare(k)
+	pentru i = 0, k - 1
+		daca x[i] = x[k] && v[i][k] = 1 atunci
+			return false 
+	return true			
+
+procedura retineSol
+	pentru i = 0, n - 1
+		scrie "tara", i, "cu", culoare[x[i]]
+
+
+start 
+	citeste n
+	pentru i = 0, n - 2
+		pentru j = i + 1, n - 1
+			citeste v[i][j]
+	citeste m
+	pentru i = 0, n - 1
+		citeste culoare[i]
+	Backtracking
+stop
+
+
+-se da o multime A cu n elem, sa se genereze toate submultimile ei
+
+ex. n = 3
+A = {2, 5, 3}
+
+C = (Ci)i=0,n-1
+
+Ci = 	{1, daca ai apare in submult
+	{0, daca ai nu apare in submult
+
+multimea vida -> (0,0,0)
+{2} -> (1,0,0)
+{5} -> (0,1,0)
+{3} -> (0,0,1)
+{2, 5} -> (1,1,0)
+{5, 3} -> (0,1,1)
+{2, 3} -> (1,0,1)
+{2, 5, 3} -> (1,1,1)
+
+Cond. interne: nu exista
+-> continuare = T
+
+procedura Backtracking
+	pentru i = 0, n - 1
+		x[i] = -1 
+	k = 0
+	cat timp k >= 0
+		daca k = n atunci
+			retineSol
+			k = k - 1
+		altfel daca x[k] < 1
+			x[k] = x[k] + 1
+			k = k + 1
+		altfel 
+			x[k] = -1 
+			k = k - 1
+
+procdura retineSol
+	scrie "["
+	pentru i = 0, n - 1
+		daca x[i] = 1 atunci
+			scrie a[i]
+	scrie "]"
+
+start
+	citeste n
+	pentru i = 0, n - 1
+		citeste a[i]
+stop

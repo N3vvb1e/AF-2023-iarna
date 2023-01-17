@@ -1,0 +1,136 @@
+17.11.2022 - AF
+
+BACKTRACKING
+
+- in general problemele pe care le vom rezolva folosind metoda backtracking presupune determinarea unor vectori
+cu componentele x = (x0, x1, ..., xn-1), unde
+									-fiecare component xi a vectorului x ia valori dintr-o multime 
+									finita Vi, oricare ar fi i=0,n-1
+									-componentele vectorului trebuie sa indeplineasca anumite conditii, 
+									numite conditii interne
+
+- sa se genereze TOATE permutarile multimii 
+
+EX: {1, 2, 3}
+x = (x0, x1, x2)
+x apartine {1, 2, 3}, oricare ar fi i=0,2
+conditiile interne xi != xj, pentru i != j
+
+V0 x V1 x ... x Vn - spatiul tuturor solutiilor posibile
+
+Prin metoda Backtracking se evita generarea tuturor solutiilor posibile. Vectorul solutie x este construit progresiv 
+incepand de la prima sa componenta x0. Componenta xk va primi valori (din Vk) numai dupa ce componentele x0, x1, xk-1 
+au primit deja valori care nu contrazic conditiile interne. Valoarea atribuita componentei xk, trebuie sa 
+indeplineasca anumite conditii numite conditii de continuare care sunt deduse de programator pe baza conditiilor 
+interne (in general conditiile de continuare sunt restrictiile conditiilor interne la primele k+1 componente ale
+vectorului) 
+
+Obs. - Conditiile de continuare sunt conditii necesare pentru a obtine solutii, dar nu si suficiente. Vom urmari 
+identificare unor conditii de continuare cat mai dure pentru a elimina cat mai multe dintre solutiile 
+neviabile.
+
+Daca valoarea atribuita lui xk inlocuieste conditiile de continuare atunci se trece la a da valori componentei 
+urmatoare (xk+1). In caz contrar se incearca o noua valoare din Vk pentru xk. In momentul in care au fost epuizate 
+toate valorile din Vk se face o revenire la componena xk-1 careia i se vor atribui noi valori neincercate inca.
+
+
+(|0 0 0) -> (1 |0 0) -> (1 |1 0) -> (1 2 |0) -> (1 2 |1) -> (1 2 |2) -> (1 2 3|) -> (1 2 |3) -> (1 |2 0) -> (1 3 |0)
+														revenirea dupa sol
+-> (1 3 |1) -> (1 3 2|) -> (1 3 |2) -> (1 3 |3) -> (1 |3 0) -> (|1 0 0) -> ... -> (|3 0 0)
+
+(1 2 3) , (1 3 2), ...
+
+In multe probleme V0 = V1 = ... Vn-1 = {1, ..., n}
+
+procedura backtracking
+	pentru i = 0, n - 1
+		x[i] = 0;
+	k = 0 
+	cat timp k >= 0
+		daca k = n atunci	// avem o solutie
+			retineSol
+			k = k - 1		// revenim dupa solutie
+		altfel
+			daca x[k] < n atunci		//exista valori neincercate
+				x[k] = x[k] + 1
+				daca continuare(k) atunci		//daca sunt indeplinite conditiile de continuare
+					k = k + 1
+		altfel	//revenire
+			x[k] = 0
+			k = k - 1
+
+Procedura retineSol retine solutia (o afiseaza), dar poate sa faca si un minim sau un maxim al unei valoari asociate
+solutiei.
+continuare este o solutie booleana care returneaza true daca xk indeplineste conditiile de continuare si false in 
+caz contrar
+
+
+-sa se genereze permutarile (TOATE) multimii {1, 2, ..., n}
+
+*procedura bactracking de mai sus fara nicio modificare
+
+procedura retineSol
+	pentru i = 0, n - 1
+		scrie x[i]
+
+
+functia continuare (k)
+	pentru i = 0 , k - 1
+		daca x[k] = x[i] atunci
+			return false
+	return true 
+ 		
+
+- sa se afiseze aranjamentele de 3 luate cate 2
+
+n = 3, m = 2
+
+1 2 		x = (x0, x1, ..., xm-1)
+1 3		xi apartine {1, 2, ..., n}, oricare ar fi i = 0,m-1
+2 1		conditiile interne xi != xj, pentru i != j
+2 3		-> sunt aceleasi ca la permutari => functia de continuare va fi aceeasi ca la permutari
+3 1 		
+3 2
+
+procedura backtracking
+	pentru i = 0, m - 1
+		x[i] = 0;
+	k = 0 
+	cat timp k >= 0
+		daca k = m atunci	// avem o solutie
+			retineSol
+			k = k - 1		// revenim dupa solutie
+		altfel
+			daca x[k] < n atunci		//exista valori neincercate
+				x[k] = x[k] + 1
+				daca continuare(k) atunci		//daca sunt indeplinite conditiile de continuare
+					k = k + 1
+		altfel	//revenire
+			x[k] = 0
+			k = k - 1
+
+procedura retineSol
+	pentru i = 0, m - 1
+		scrie x[i]
+
+functia continuare (k)
+	pentru i = 0 , k - 1
+		daca x[k] = x[i] atunci
+			return false
+	return true
+
+
+- sa se genereze combinarile de n luate cate m
+
+1 2 		x = (x0, x1, ..., xm-1)
+1 3		xi apartine {1, 2, ..., n}, oricare ar fi i = 0,m-1
+2 3		conditiile interne xi < xi+1 pt i=0,n-2 
+		
+*procedura backtracking aceeasi ca la aranjmente*
+*procedura retineSol aceeasi ca la aranjamente*
+ 
+functia continuare (k)
+	daca k > 0 si x[k] <= x[k - 1] atunci
+		return false 
+	return true
+

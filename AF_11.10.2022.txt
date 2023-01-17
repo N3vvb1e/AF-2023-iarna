@@ -1,0 +1,182 @@
+11.10.2022 - AF
+
+1. maximul a 2 numere 
+
+start 
+	citeste a, b
+	-daca a > b atunci 
+	|	scrie a 
+	|altfel 	
+	|	scrie b
+	L
+stop
+
+2. maximul a 3 numere
+
+start 
+	citeste a, b, c
+	-daca a > b atunci
+	|	max <- a 
+	|altfel 
+	|	max <- b 
+	L
+	-daca c > max
+	|	max <- c
+	L
+	scrie max
+stop
+
+integer MIN VALUE (-infinit) in pseudocod
+
+3. max a n numere
+
+start
+	citeste n
+	max <- -infinit
+	-pentru i = 1, n, 1
+	|	citeste a
+	|	-daca a > max
+	|	|	max = a 
+	|	L
+	L	
+	scrie max
+stop
+
+
+4. se citesc n numere, sa se det. cel mai mare dintre cele negative (maximul)
+
+
+start
+	citeste n
+	max <- -infinit
+	pentru i = 1, n, 1
+		citeste x
+		daca x > max si x < 0 atunci	
+			max = x
+	daca max = -infinit atunci
+		scrie nu exista 
+	altfel 
+		scrie max
+stop
+
+
+5. se citesc n nr - cate pare, cate impare
+
+start 
+	ct_nr_pare <- 0
+	citeste n
+	pentru i = 1, n, 1
+		citeste x
+		daca x % 2 = 0 atunci
+			ct_nr_pare = ct_nr_pare + 1
+	ct_nr_impare = n - ct_nr_pare
+	scrie ct_nr_impare, ct_nr_pare
+stop
+	
+
+6. se citesc n nr, sa se det cate sunt poz, negative, respectiv nule
+
+start
+	citeste n
+	poz <- 0, neg <- 0
+	pentru i = 1, n
+		citeste x
+		daca x < 0 atunci
+			neg = neg + 1
+		altfel daca x > 0 
+			poz = poz + 1
+	scrie poz, neg, n - (poz + neg)
+stop
+
+7. sa se verif daca un nr nat x este sau nu prim 
+
+start 
+	citeste x
+	prim = true 
+	daca x < 2 sau (x > 2 si x % 2 = 0) 
+		prim = false 
+	pentru d = 3, radical din x, 2
+		daca x % d = 0
+			prim = false
+			(break)
+ 	daca prim = true 
+		scrie nr este prim
+	altfel
+		scrie nr nu este prim
+stop
+
+8. se da un nr nat n, sa se verifice daca toate cifrele lui sunt pare
+
+start 
+	citeste n
+	nr_bun = true 
+	cat timp n > 0 executa
+		daca n % 2 = 1 atunci
+			nr_bun = false
+			(break)
+		n = n / 10
+	daca nr_bun = true atunci
+		scrie toate cifrele sunt pare
+	altfel
+		scrie nu toate cifrele sunt pare
+stop
+	
+9. sa se det cifra maxima a unui nr nat n
+
+start 
+	citeste n
+	cifmax <- 0
+	cat timp n > 0 executa
+		daca n % 10 > cifmax atunci
+			cifmax = n % 10
+		n = n / 10
+	scrie cifmax
+stop
+
+10. sa se det numarul de aparitii al cifrei maxime
+	
+
+start 
+	citeste n
+	cifmax <- -1, nr_aparitii <- 0
+	cat timp n > 0 executa
+		daca n % 10 > cifmax atunci
+			cifmax = n % 10
+			nr_aparitii = 1 
+		altfel daca n % 10 = cifmax atunci
+			nr_aparitii = nr_aparitii + 1
+		n = n / 10
+	scrie cifmax, "_", nr_aparitii
+stop
+
+
+11. oglinditul unui nr
+
+start 
+	citeste n
+	og <- 0
+	cat timp n != 0 executa 
+		og = og * 10 + n % 10
+		n = n / 10
+	scrie og
+stop
+
+
+12. verif daca un nr nat n este palindrom
+
+start 
+	citeste n
+	og <- 0, x <- n
+	cat timp x != 0 executa 
+		og = og * 10 + x % 10
+		x = x / 10
+	daca og = n atunci
+		scrie nr este palindrom
+	altfel
+		scrie nr nu este palindrom
+stop
+ 
+13. se citesc n nr, sa se verif daca sunt in ordine crescatoare
+
+
+

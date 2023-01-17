@@ -1,0 +1,127 @@
+AF - 12.01.23
+
+Liste liniare implementate dinamic
+
+Pentru a implementa dinamic orice structura de date, e nevoie de un mecanism:
+- de alocare a memoriei 
+- de eliberare a memoriei -> Garbage Collection
+
+In implementarea dinamica se renunta la restrictia (specifica implementarii statice) ca elementele listei sa se 
+pastreze in locatii succesive de memorie. 
+=> fiecare element al listei va avea 2 componente:
+- o informatie utila (info)
+- informatia de legatura (urm) - retine adresa la care se afla urmatorul element al listei
+
+prim - adresa de inceput a listei 
+
+
+Crearea unei liste vide 
+
+procedura creare
+	prim = null
+
+	
+Testarea daca o lista e vida
+
+functie eVida
+	return prim == null
+
+
+Adaugarea unui element la inceputul listei
+
+procedura adInceput (elem)
+	p = new Nod
+	p.info = elem
+	p.urm = prim
+	prim = p
+
+
+Adaugarea la sfarsitul listei 
+
+procedura AdSfarsit (elem)
+	p = new Nod
+	p.info = elem
+	p.urm = null
+	daca prim == null atunci
+		prim = p
+	altfel
+		q = prim
+		cat timp q.urm != null
+			q = q.urm
+		q.urm = p
+
+
+Afisarea elementelor unei liste 
+
+procedura afisare 
+	p = prim 
+	cat timp p != null
+		scrie p.info
+		p = p.urm
+
+
+Cautarea unui element 
+
+functie cautaElem (elem)
+	p = prim
+	cat timp p != null si p.info != elem
+		p = p.urm
+	return p
+
+
+Eliminarea primului element din lista
+
+functie stergeInceput 
+	daca prim == null atunci 
+		eroare
+	altfel
+		aux = prim.info
+		prim = prim.urm
+		return aux
+
+
+Eliminarea ultimului element din lista
+
+functie stergeSfarsit 
+	daca prim == null atunci 
+		eroare
+	altfel 
+		daca prim.urm = null atunci
+			aux = prim.info
+			prim = null
+			return aux
+		altfel
+			p = prim
+			cat timp p.urm.urm != null
+				p = p.urm
+			aux = p.urm.info 
+			p.urm = null
+			return aux 
+			
+
+Adaugarea unui element dupa un element dat
+
+procedura adDupa (elemA, elem)
+	q = cautaElem (elemA)
+	daca q == null atunci
+		eroare
+	altfel
+		p = new Nod
+		p.info = elemA
+		p.urm = q.urm
+		q.urm = p
+
+
+Eliminarea unui element de dupa un element dat
+
+functie stergeDupa (elem)
+	q = cautaElem (elem)
+	daca q == null sau q.urm == null atunci
+		eroare
+	altfel 
+		aux = q.urm.info
+		q.urm = q.urm.urm
+		return aux
+		
+
+
